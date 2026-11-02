@@ -1,0 +1,60 @@
+/* TASK 2 - Small additions on top of the Bootswatch Lux theme */
+
+/* ---------- Hero (Mainpage) ---------- */
+.hero {
+    position: relative;
+    color: #fff;
+    padding: 6rem 0 5rem;
+    /* Background photo: save a free image as public/images/hero.jpg.
+       If it is missing, the gradient alone is shown. */
+    background:
+        linear-gradient(135deg, rgba(26, 26, 26, .85), rgba(205, 42, 62, .65)),
+        url('/images/hero.jpg') center / cover no-repeat,
+        #1a1a1a;
+}
+.hero h1 { color: #fff; font-size: clamp(2rem, 5vw, 3.25rem); letter-spacing: .08em; }
+.hero .lead { max-width: 40rem; color: rgba(255, 255, 255, .85); }
+.hero-flag {
+    display: inline-flex; height: 6px; width: 90px; margin-bottom: 1.25rem;
+    background: linear-gradient(90deg, #cd2a3e 33.3%, #fff 33.3% 66.6%, #436f4d 66.6%);
+}
+
+/* ---------- Page header strip (inner pages) ---------- */
+.page-header {
+    background: linear-gradient(135deg, #1a1a1a, #3b3b3b);
+    color: #fff;
+    padding: 2.5rem 0;
+    margin-bottom: 2rem;
+}
+.page-header h1 { color: #fff; margin: 0; font-size: clamp(1.5rem, 4vw, 2.2rem); }
+.page-header p { color: rgba(255, 255, 255, .75); margin: .5rem 0 0; }
+
+/* ---------- Stat tiles ---------- */
+.stat-card { border: 0; border-top: 4px solid #cd2a3e; transition: transform .2s ease, box-shadow .2s ease; }
+.stat-card:nth-child(2n) { border-top-color: #436f4d; }
+.stat-card .stat-value { font-size: 2rem; font-weight: 700; line-height: 1.1; }
+.stat-card .stat-label { text-transform: uppercase; font-size: .75rem; letter-spacing: .1em; color: #6c757d; }
+
+/* ---------- Hover lift for cards ---------- */
+.card-hover { transition: transform .2s ease, box-shadow .2s ease; }
+.card-hover:hover { transform: translateY(-4px); box-shadow: 0 .75rem 1.5rem rgba(0, 0, 0, .12); }
+
+.feature-icon {
+    width: 3rem; height: 3rem; border-radius: .5rem;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: #f1f1f1; font-size: 1.4rem;
+}
+
+/* ---------- Tables ---------- */
+.table-responsive { border-radius: .375rem; }
+.table thead th { white-space: nowrap; }
+
+/* ---------- Messages ---------- */
+.message-card { border-left: 4px solid #cd2a3e; }
+.message-body { white-space: pre-line; }
+
+/* ---------- Calculator ---------- */
+.calc-result { font-size: 1.75rem; font-weight: 700; word-break: break-all; }
+
+/* ---------- Footer ---------- */
+.site-footer a:hover { color: #fff !important; }
