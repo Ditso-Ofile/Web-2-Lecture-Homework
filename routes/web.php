@@ -7,6 +7,7 @@ use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GraphController;
+use App\Http\Controllers\TownCrudController;
 
 // Mainpage
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -44,6 +45,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Messages
     Route::get('messages', [MessageController::class, 'index'])->name('messages.index');
+
+    // CRUD (TASK 9) - towns table, admin only ('admin' middleware: see bootstrap/app.php)
+    // URLs: /crud, /crud/create, /crud/{town}, /crud/{town}/edit
+    Route::resource('crud', TownCrudController::class)
+        ->parameters(['crud' => 'town'])
+        ->middleware('admin');
 });
 
 require __DIR__.'/settings.php';
