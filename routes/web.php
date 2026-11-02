@@ -1,8 +1,6 @@
-
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DatabaseController;
@@ -24,8 +22,9 @@ Route::get('database/towns/{town}', [DatabaseController::class, 'show'])->name('
 // Pages requiring login
 Route::middleware(['auth', 'verified'])->group(function () {
 
+    // After login/registration the starter kit goes to /dashboard -> send users to our Mainpage
     Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
+        return redirect()->route('home');
     })->name('dashboard');
 
     Route::get('user', function () {
