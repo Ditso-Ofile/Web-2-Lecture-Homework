@@ -8,6 +8,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GraphController;
 use App\Http\Controllers\TownCrudController;
+use App\Http\Controllers\CalculatorController;
 
 // Mainpage
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -28,6 +29,11 @@ Route::post('contact', [ContactController::class, 'store'])->name('contact.store
 
 // Graph (TASK 8)
 Route::get('graph', [GraphController::class, 'index'])->name('graph.index');
+
+// Test menu - calculator
+Route::get('calc', [CalculatorController::class, 'showForm'])->name('calc.form');
+Route::post('calc', [CalculatorController::class, 'calculate'])->name('calc.calculate');
+Route::post('calc/clear', [CalculatorController::class, 'clearHistory'])->name('calc.clear');
 
 // Pages requiring login
 Route::middleware(['auth', 'verified'])->group(function () {
