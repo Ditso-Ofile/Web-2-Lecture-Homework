@@ -1,12 +1,14 @@
-
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\GraphController;
+use App\Http\Controllers\TownCrudController;
+use App\Http\Controllers\CalculatorController;
 
 // Mainpage
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -21,11 +23,24 @@ Route::get('database', [DatabaseController::class, 'index'])->name('database.ind
 
 Route::get('database/towns/{town}', [DatabaseController::class, 'show'])->name('database.town');
 
+// Contact (TASK 6) - guests can send messages too
+Route::get('contact', [ContactController::class, 'create'])->name('contact.create');
+Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
+
+// Graph (TASK 8)
+Route::get('graph', [GraphController::class, 'index'])->name('graph.index');
+
+// Test menu - calculator
+Route::get('calc', [CalculatorController::class, 'showForm'])->name('calc.form');
+Route::post('calc', [CalculatorController::class, 'calculate'])->name('calc.calculate');
+Route::post('calc/clear', [CalculatorController::class, 'clearHistory'])->name('calc.clear');
+
 // Pages requiring login
 Route::middleware(['auth', 'verified'])->group(function () {
 
+    // After login/registration the starter kit goes to /dashboard -> send users to our Mainpage
     Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
+        return redirect()->route('home');
     })->name('dashboard');
 
     Route::get('user', function () {
@@ -36,6 +51,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Messages
     Route::get('messages', [MessageController::class, 'index'])->name('messages.index');
+
+    // CRUD (TASK 9) - towns table, admin only ('admin' middleware: see bootstrap/app.php)
+    // URLs: /crud, /crud/create, /crud/{town}, /crud/{town}/edit
+    Route::resource('crud', TownCrudController::class)
+        ->parameters(['crud' => 'town'])
+        ->middleware('admin');
 });
 
 require __DIR__.'/settings.php';
