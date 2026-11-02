@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\GraphController;
 
 // Mainpage
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -23,6 +24,9 @@ Route::get('database/towns/{town}', [DatabaseController::class, 'show'])->name('
 // Contact (TASK 6) - guests can send messages too
 Route::get('contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
+
+// Graph (TASK 8)
+Route::get('graph', [GraphController::class, 'index'])->name('graph.index');
 
 // Pages requiring login
 Route::middleware(['auth', 'verified'])->group(function () {
